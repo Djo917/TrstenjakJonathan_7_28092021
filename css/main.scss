@@ -1,0 +1,140 @@
+$texttitle: #D04F4F;
+$backgroundbar: #E7E7E7;
+$colorrecipe: #3282F7;
+$colordevices: #68D9A4;
+$colorustensils: #ED6454;
+
+body {
+    max-width: 1280px;
+    margin: auto;
+}
+
+main {
+    width: 100%;
+}
+
+.introduction {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+
+    &--logo {
+        margin-left: auto;
+        margin-right: auto;
+        width: 5em;
+        height: 5em;
+    }
+
+    &--title {
+        font-family: 'DM Sans';
+        font-weight: 700;
+        color: $texttitle;
+    }
+}
+
+.searchfield {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 2.5em;
+    width: 97%;
+    border-radius: 0.3em;
+    background-color: $backgroundbar;
+
+    &--searchbar {
+        width: 90%;
+        background-color: $backgroundbar;
+        border: none;
+    }
+
+    &--icon {
+        height: 1.5em;
+        width: 1.5em;
+    }
+}
+
+.filteroptions {
+    margin-top: 1.5em;
+    display: flex;
+
+    select {
+        height: 4em;
+        width: 9em;
+        border-radius: 0.3em;
+        margin-right: 1.5em;
+        color: white;
+        font-family: 'Lato';
+        font-weight: 700;
+    }
+
+    &--recipes {
+        background-color: $colorrecipe;
+    }
+
+    &--device {
+        background-color: $colordevices;
+    }
+
+    &--ustensils {
+        background-color: $colorustensils;
+    }
+}
+
+.contentreceipts {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2em;
+    
+    &__titleandtime {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-left: 0.5em;
+        margin-right: 0.5em;
+    }
+    &__cardsrecipe {
+        width: 35%;
+        background-color: $backgroundbar;
+        margin-right: 3em;
+    }
+
+    &__picture {
+        height: 12em;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.contentreceipts__timeprep {
+    display: flex;
+    align-items: center;
+}
+
+.cardsrecipe__recipes {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 0.5em;
+}
+
+.cardsrecipe__explain {
+    width: 50%;
+}
+
+.cardsrecipe__recipes--name {
+    font-weight: bold;
+}
+
+
+@media screen and (max-width: 375px) {
+    .contentreceipts {
+        flex-direction: column;
+    }
+
+    .contentreceipts__cardsrecipe {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    
+}

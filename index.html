@@ -4,12 +4,196 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@700&family=Lato:wght@400;700&family=Roboto&display=swap" rel="stylesheet">
     <link href="" rel="stylesheet">
     <link rel ="stylesheet" href="css/main.css">
+    <link rel="icon" type="image/png" href="toque.svg">
     <title>Les petits plats</title>
 </head>
-<body>
 
+<body>
+    <main>
+        <header class="introduction">
+            <img class="introduction--logo" src="toque.svg" alt="logo du site Les petits plats">
+            <h1 class="introduction--title">Les petits plats</h1>
+        </header>
+        
+        <div class="searchfield">
+            <label for="searchbar"></label>
+            <input class="searchfield--searchbar" id="searchbar" minlength="3" type="text" 
+            placeholder="Rechercher un ingrédient, appareil, usentensiles ou une recette">
+            <img class="searchfield--icon" src="searchicon.svg" alt="icone de recherche de la barre">
+        </div>
+        
+        <nav class="filteroptions">
+            <select class="filteroptions--recipes">
+                <option value="Ingrédients">Ingrédients</option>
+            </select>
+            <select class="filteroptions--device">
+                <option value="Appareil">Appareil</option>
+            </select>
+            <select class="filteroptions--ustensils">
+                <option value="Ustensiles">Ustensiles</option>
+            </select>
+        </nav>
+
+        <section class="contentreceipts">
+            <article class="contentreceipts__cardsrecipe">
+                <img 
+                    class="contentreceipts__picture" 
+                    src="recipe.jpg" 
+                    alt="photo générique de la recette finit"
+                >
+
+                <div class="contentreceipts__titleandtime">
+                    <h2 class="contentreceipts__titleandtime--title">Limonade de coco</h2>
+                    <div class="contentreceipts__timeprep">
+                        <img 
+                        src="timer.svg" 
+                        alt="image d'un chronomètre" 
+                        class="contentreceipts__titleandtime--time"
+                        >
+                        <span>10min</span>
+                    </div>
+                </div>
+                
+                <div class="cardsrecipe__recipes">
+                    <div class="cardsrecipe__components">
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Lait de coco:</span> 400ml
+                        </p>
+
+                        <p class ="cardsrecipe_çrecipes--text">
+                            <span class="cardsrecipe__recipes--name">Jus de citron:</span> 2
+                        </p>
+
+                        <p class ="cardsrecipe_çrecipes--text">
+                            <span class="cardsrecipe__recipes--name">Crème de coco:</span> 4 cuillères
+                        </p>
+
+                        <p class ="cardsrecipe_çrecipes--text">
+                            <span class="cardsrecipe__recipes--name">Sucre:</span> 20g
+                        </p>
+
+                        <p class ="cardsrecipe_recipes--text">
+                            <span class="cardsrecipe__recipes--name">Glaçons:</span> 2
+                        </p>
+                    </div>
+
+                    
+                    <div class="cardsrecipe__explain">
+                        <p class ="cardsrecipe_recipes--text">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, 
+                        le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                    </div> 
+
+                </div>
+            </article>
+
+            <article class="contentreceipts__cardsrecipe">
+                <img 
+                    class="contentreceipts__picture" 
+                    src="recipe.jpg" 
+                    alt="photo générique de la recette finit"
+                >
+                <div class="contentreceipts__titleandtime">
+                    <h2 class="contentreceipts__titleandtime--title">Limonade de coco</h2>
+                    <div class="contentreceipts__timeprep">
+                        <img 
+                        src="timer.svg" 
+                        alt="image d'un chronomètre" 
+                        class="contentreceipts__titleandtime--time"
+                        >
+                        <span>10min</span>
+                    </div>
+
+                </div>
+                
+                <div class="cardsrecipe__recipes">
+                    <div class="cardsrecipe__components">
+                        <p class ="cardsrecipe_çrecipes--text">
+                            <span class="cardsrecipe__recipes--name">Lait de coco:</span> 400ml
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Jus de citron:</span> 2
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Crème de coco:</span> 4 cuillères
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Sucre:</span> 20g
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Glaçons:</span> 2
+                        </p>
+                    </div>
+
+                    
+                    <div class="cardsrecipe__explain">
+                        <p class ="cardsrecipe_recipes--text">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, 
+                        le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                    </div> 
+                </div>
+            </article>
+
+            <article class="contentreceipts__cardsrecipe">
+                <img 
+                    class="contentreceipts__picture" 
+                    src="recipe.jpg" 
+                    alt="photo générique de la recette finit"
+                >
+
+                <div class="contentreceipts__titleandtime">
+                    <h2 class="contentreceipts__titleandtime--title">Limonade de coco</h2>
+                    <div class="contentreceipts__timeprep">
+                        <img 
+                        src="timer.svg" 
+                        alt="image d'un chronomètre" 
+                        class="contentreceipts__titleandtime--time"
+                        >
+                        <span>10min</span>
+                    </div>
+                </div>
+                
+                <div class="cardsrecipe__recipes">
+                    <div class="cardsrecipe__components">
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Lait de coco:</span> 400ml
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Jus de citron:</span> 2
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Crème de coco:</span> 4 cuillères
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Sucre:</span> 20g
+                        </p>
+
+                        <p class ="cardsrecipe__recipes--text">
+                            <span class="cardsrecipe__recipes--name">Glaçons:</span> 2
+                        </p>
+                    </div>
+
+                    
+                    <div class="cardsrecipe__explain">
+                        <p class ="cardsrecipe_recipes--text">Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, 
+                        le jus de 2 citrons et le sucre. Mixer jusqu'à avoir la consistence désirée</p>
+                    </div> 
+                </div>
+            </article>
+
+        </section>
+    </main>
+    
     <script type="module" src="./js/app.js"></script>
 </body>
 </html>
