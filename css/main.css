@@ -57,6 +57,66 @@ main {
   width: 1.5em;
 }
 
+.tagcontent {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-top: 1em;
+  width: 50%;
+  color: white;
+  font-family: 'Lato';
+  font-weight: 700;
+}
+
+.tagcontent--recipes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2.3em;
+  border-radius: 0.3em;
+  background-color: #3282F7;
+}
+
+.tagcontent--devices {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2.3em;
+  border-radius: 0.3em;
+  background-color: #68D9A4;
+}
+
+.tagcontent--ustensils {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 2.3em;
+  border-radius: 0.3em;
+  background-color: #ED6454;
+}
+
+.margin {
+  margin-right: 1em;
+}
+
 .filteroptions {
   margin-top: 1.5em;
   display: -webkit-box;

@@ -54,6 +54,49 @@ main {
     }
 }
 
+.tagcontent {
+    display: flex;
+    margin-top: 1em;
+    width: 50%;
+    color: white;
+    font-family: 'Lato';
+    font-weight: 700;
+
+    &--recipes {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 2.3em;
+        // width: 30%;
+        border-radius: 0.3em;
+        background-color: $colorrecipe;
+    }
+
+    &--devices {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 2.3em;
+        // width: 30%;
+        border-radius: 0.3em;
+        background-color: $colordevices;
+    }
+
+    &--ustensils {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 2.3em;
+        // width: 30%;
+        border-radius: 0.3em;
+        background-color: $colorustensils;
+    }
+}
+
+.margin {
+    margin-right: 1em;
+}
+
 .filteroptions {
     margin-top: 1.5em;
     display: flex;

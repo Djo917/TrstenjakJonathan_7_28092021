@@ -10,6 +10,7 @@ class IndexPage {
         this.getRecipes();
         this.getDevices();
         this.getUstensils();
+        this.displayTags();
     }
 
     getRecipes() {
@@ -63,7 +64,6 @@ class IndexPage {
                 ustensils.ustensils.forEach(ust => {
                     wholeUstensils.push(ust);
                 })
-                
             })
 
             let sortedUstensils = [...new Set(wholeUstensils)];
@@ -76,10 +76,56 @@ class IndexPage {
 
     displayComponents(type, compo) {
         const options = document.createElement("option");
-
         type.appendChild(options);
         options.value = `${compo}`;
         options.innerText = `${compo}`;
+    }
+
+    displayTags() {
+        const tagRecipes = document.querySelector(".filteroptions--recipes");
+        const tagDevices = document.querySelector(".filteroptions--device");
+        const tagUstensils = document.querySelector(".filteroptions--ustensils");
+        const tagcontent = document.querySelector(".tagcontent");
+        
+
+        tagRecipes.addEventListener('change', (e) => {
+            if(e.target.nodeName === 'SELECT') {
+                const tag = document.createElement("span");
+                const cross = document.createElement("img");
+                tagcontent.appendChild(tag);
+                tag.innerText = e.target.value;
+                tag.classList.add("tagcontent--recipes");
+                tag.classList.add("margin");
+                tag.appendChild(cross);
+                cross.src = "cross.svg";
+            }
+        })
+
+        tagDevices.addEventListener('change', (e) => {
+            if(e.target.nodeName === 'SELECT') {
+                const tag = document.createElement("span");
+                const cross = document.createElement("img");
+                tagcontent.appendChild(tag);
+                tag.innerText = e.target.value;
+                tag.classList.add("tagcontent--devices");
+                tag.classList.add("margin");
+                tag.appendChild(cross);
+                cross.src = "cross.svg";
+            }
+        })
+
+        tagUstensils.addEventListener('change', (e) => {
+            if(e.target.nodeName === 'SELECT') {
+                const tag = document.createElement("span");
+                const cross = document.createElement("img");
+                tagcontent.appendChild(tag);
+                tag.innerText = e.target.value;
+                tag.classList.add("tagcontent--ustensils");
+                tag.classList.add("margin");
+                tag.appendChild(cross);
+                cross.src = "cross.svg";
+            }
+        })
     }
 }
 
