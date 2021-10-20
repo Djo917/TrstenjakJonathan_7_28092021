@@ -62,7 +62,7 @@ main {
   display: -ms-flexbox;
   display: flex;
   margin-top: 1em;
-  width: 50%;
+  width: 100%;
   color: white;
   font-family: 'Lato';
   font-weight: 700;
@@ -72,9 +72,6 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -87,9 +84,6 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -102,9 +96,6 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -114,6 +105,8 @@ main {
 }
 
 .margin {
+  padding-left: 0.5em;
+  padding-right: 0.5em;
   margin-right: 1em;
 }
 
@@ -150,10 +143,11 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 1280px;
   margin-top: 2em;
 }
 
@@ -172,9 +166,10 @@ main {
 }
 
 .contentreceipts__cardsrecipe {
-  width: 35%;
+  width: 29%;
   background-color: #E7E7E7;
   margin-right: 3em;
+  margin-bottom: 1em;
 }
 
 .contentreceipts__picture {

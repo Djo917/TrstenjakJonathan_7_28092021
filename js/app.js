@@ -1,8 +1,10 @@
 import { Ajax } from './ajax.class.js';
+import { View } from './view.class.js';
 
 
 class IndexPage {
-    constructor(ajax) {
+    constructor(view, ajax) {
+        this.view = view;
         this.ajax = ajax;
     }
 
@@ -11,6 +13,16 @@ class IndexPage {
         this.getDevices();
         this.getUstensils();
         this.displayTags();
+        this.showRecipes();
+    }
+
+    showRecipes(){
+        const datas = this.ajax.fetchData();
+
+        datas.then(data => {
+            this.view.renderRecipes(data);
+        })
+        
     }
 
     getRecipes() {
@@ -129,5 +141,5 @@ class IndexPage {
     }
 }
 
-const indexPage = new IndexPage(new Ajax('./data/recipes.json'));
+const indexPage = new IndexPage(new View(), new Ajax('./data/recipes.json'));
 indexPage.run();

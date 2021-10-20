@@ -57,43 +57,39 @@ main {
 .tagcontent {
     display: flex;
     margin-top: 1em;
-    width: 50%;
+    width: 100%;
     color: white;
     font-family: 'Lato';
     font-weight: 700;
 
     &--recipes {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         height: 2.3em;
-        // width: 30%;
         border-radius: 0.3em;
         background-color: $colorrecipe;
     }
 
     &--devices {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         height: 2.3em;
-        // width: 30%;
         border-radius: 0.3em;
         background-color: $colordevices;
     }
 
     &--ustensils {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         height: 2.3em;
-        // width: 30%;
         border-radius: 0.3em;
         background-color: $colorustensils;
     }
 }
 
 .margin {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     margin-right: 1em;
 }
 
@@ -126,8 +122,9 @@ main {
 
 .contentreceipts {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1280px;
     margin-top: 2em;
     
     &__titleandtime {
@@ -138,9 +135,10 @@ main {
         margin-right: 0.5em;
     }
     &__cardsrecipe {
-        width: 35%;
+        width: 29%;
         background-color: $backgroundbar;
         margin-right: 3em;
+        margin-bottom: 1em;
     }
 
     &__picture {
