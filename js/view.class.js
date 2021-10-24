@@ -13,10 +13,8 @@ export class View {
             const div3 = document.createElement("div");
             const div4 = document.createElement("div");
             const div5 = document.createElement("div");
-            const div6 = document.createElement("div");
             const h2 = document.createElement("h2");
             const span = document.createElement("span");
-            const span2 = document.createElement("span");
             const p = document.createElement("p");
 
             console.log(recipes);
@@ -51,7 +49,6 @@ export class View {
             recipes.ingredients.forEach(ingredient => {
                 const pRecipe = document.createElement("p");
                 const spanRecipe = document.createElement("span");
-                
                 
                 div4.appendChild(pRecipe)
                 pRecipe.classList.add("cardsrecipe__recipes--text");                

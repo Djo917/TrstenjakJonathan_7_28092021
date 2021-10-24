@@ -157,6 +157,10 @@ main {
     display: flex;
     justify-content: space-between;
     margin-left: 0.5em;
+
+    &--text {
+        text-overflow: ellipsis;
+    }
 }
 
 .cardsrecipe__explain {

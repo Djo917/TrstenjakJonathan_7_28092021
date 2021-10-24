@@ -198,6 +198,10 @@ main {
   margin-left: 0.5em;
 }
 
+.cardsrecipe__recipes--text {
+  text-overflow: ellipsis;
+}
+
 .cardsrecipe__explain {
   width: 50%;
 }

@@ -21,8 +21,7 @@ class IndexPage {
 
         datas.then(data => {
             this.view.renderRecipes(data);
-        })
-        
+        }) 
     }
 
     getRecipes() {
