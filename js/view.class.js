@@ -16,7 +16,7 @@ export class View {
             const h2 = document.createElement("h2");
             const span = document.createElement("span");
             const p = document.createElement("p");
-
+            console.log("coucou");
             console.log(recipes);
             idSection.appendChild(article);
             article.classList.add("contentreceipts__cardsrecipe");
