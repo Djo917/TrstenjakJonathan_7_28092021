@@ -98,7 +98,6 @@ class IndexPage {
         const tagUstensils = document.querySelector(".filteroptions--ustensils");
         const tagcontent = document.querySelector(".tagcontent");
         
-
         tagRecipes.addEventListener('change', (e) => {
             if(e.target.nodeName === 'SELECT') {
                 const tag = document.createElement("span");
@@ -109,6 +108,7 @@ class IndexPage {
                 tag.classList.add("margin");
                 tag.appendChild(cross);
                 cross.src = "cross.svg";
+                console.log(tagRecipes);
             }
         })
 

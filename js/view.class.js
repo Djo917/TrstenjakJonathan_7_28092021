@@ -17,7 +17,6 @@ export class View {
             const span = document.createElement("span");
             const p = document.createElement("p");
 
-            console.log(recipes);
             idSection.appendChild(article);
             article.classList.add("contentreceipts__cardsrecipe");
 
