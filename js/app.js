@@ -38,10 +38,7 @@ class IndexPage {
             })
 
             let sortedComponents = [... new Set(wholeComponents)];
-
-            sortedComponents.forEach(compo => {
-                this.displayComponents(selectRecipes, compo);
-            })
+            this.displayComponents(selectRecipes, sortedComponents);
         })
     }
 
@@ -57,10 +54,7 @@ class IndexPage {
             })
 
             let sortedDevices = [...new Set(wholeDevices)];
-            
-            sortedDevices.forEach(compo => {
-                this.displayComponents(selectDevices, compo);
-            })
+            this.displayComponents(selectDevices, sortedDevices);
         })
     }
 
@@ -78,18 +72,17 @@ class IndexPage {
             })
 
             let sortedUstensils = [...new Set(wholeUstensils)];
-            
-            sortedUstensils.forEach(compo => {
-                this.displayComponents(selectUstensils, compo);
-            })
+            this.displayComponents(selectUstensils, sortedUstensils);
         })
     }
 
-    displayComponents(type, compo) {
-        const options = document.createElement("option");
-        type.appendChild(options);
-        options.value = `${compo}`;
-        options.innerText = `${compo}`;
+    displayComponents(type, arrayCompo) {        
+        arrayCompo.forEach(comp => {
+            const options = document.createElement("option");
+            type.appendChild(options);
+            options.value = `${comp}`;
+            options.innerText = `${comp}`;
+        })
     }
 
     displayTags() {
