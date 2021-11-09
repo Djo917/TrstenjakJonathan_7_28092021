@@ -99,51 +99,53 @@ class IndexPage {
             })
 
             let sortedDevices = [...new Set(wholeDevices)];
-            // let arrayTags = sortedDevices;
+            let arrayTags = sortedDevices;
             this.displayComponents(selectDevices, sortedDevices);
 
-            // tagDevices.addEventListener('change', (e) => {
-            //     if(e.target.nodeName === 'SELECT') {
-            //         const tag = document.createElement("span");
-            //         const cross = document.createElement("img");
-            //         tagcontent.appendChild(tag);
-            //         tag.innerText = e.target.value;
-            //         tag.id = e.target.value;
-            //         tag.classList.add("tagcontent--devices");
-            //         tag.classList.add("margin");
-            //         tag.appendChild(cross);
-            //         cross.src = "cross.svg";
-            //         cross.classList.add("cross");
-            //         cross.classList.add("ingredients");
+            tagDevices.addEventListener('change', (e) => {
+                if(e.target.nodeName === 'SELECT') {
+                    const tag = document.createElement("span");
+                    const cross = document.createElement("img");
+                    tagcontent.appendChild(tag);
+                    tag.innerText = e.target.value;
+                    tag.id = e.target.value;
+                    tag.classList.add("tagcontent--devices");
+                    tag.classList.add("margin");
+                    tag.appendChild(cross);
+                    cross.src = "cross.svg";
+                    cross.classList.add("cross");
+                    cross.classList.add("ingredients");
                     
-            //         let i = sortedDevices.indexOf(e.target.value);
-            //         arrayTags.splice(i, 1);
-
+                    let i = sortedDevices.indexOf(e.target.value);
+                    arrayTags.splice(i, 1);
                     
-            //         selectDevices.innerHTML = `
-            //             <option value ="Appareil">Appareil</option>
-            //         `;
-            //         this.displayComponents(selectDevices, arrayTags);
-            //     }
-            // })
+                    selectDevices.innerHTML = `
+                        <option value ="Appareil">Appareil</option>
+                    `;
+                    this.displayComponents(selectDevices, arrayTags);
+                }
+            })
 
-            // const removeTags = document.querySelector(".tagcontent");
+            const removeTags = document.querySelector(".tagcontent");
 
-            // removeTags.addEventListener('click', (e) => {
-            //     if(e.target.className === 'cross ingredients') {
-            //         let id = document.getElementById(e.path[1].innerText);
-            //         console.log(removeTags);
-            //         removeTags.removeChild(id);
-            //         arrayTags.push(e.path[1].innerText);
-            //         this.displayComponents(selectDevices, arrayTags);
-            //     }
-            // })
+            removeTags.addEventListener('click', (e) => {
+                if(e.target.className === 'cross ingredients') {
+                    arrayTags.push(e.path[1].innerText);
+                    selectDevices.innerHTML = '';
+                    selectDevices.innerHTML = `
+                        <option value ="Appareil">Appareil</option>
+                    `;
+                    this.displayComponents(selectDevices, arrayTags);
+                }
+            })
         })
     }
 
     getUstensils() {
         const datas = this.ajax.fetchData();
         const selectUstensils = document.querySelector(".filteroptions--ustensils ");
+        const tagUstensils = document.querySelector(".filteroptions--ustensils");
+        const tagcontent = document.querySelector(".tagcontent");
 
         datas.then(data => {
             let wholeUstensils = [];
@@ -155,7 +157,45 @@ class IndexPage {
             })
 
             let sortedUstensils = [...new Set(wholeUstensils)];
+            let arrayTags = sortedUstensils;
             this.displayComponents(selectUstensils, sortedUstensils);
+
+            tagUstensils.addEventListener('change', (e) => {
+                if(e.target.nodeName === 'SELECT') {
+                    const tag = document.createElement("span");
+                    const cross = document.createElement("img");
+                    tagcontent.appendChild(tag);
+                    tag.innerText = e.target.value;
+                    tag.id = e.target.value;
+                    tag.classList.add("tagcontent--ustensils");
+                    tag.classList.add("margin");
+                    tag.appendChild(cross);
+                    cross.src = "cross.svg";
+                    cross.classList.add("cross");
+                    cross.classList.add("ingredients");
+                    
+                    let i = sortedUstensils.indexOf(e.target.value);
+                    arrayTags.splice(i, 1);
+                    
+                    selectUstensils.innerHTML = `
+                        <option value ="Appareil">Appareil</option>
+                    `;
+                    this.displayComponents(selectUstensils, arrayTags);
+                }
+            })
+
+            const removeTags = document.querySelector(".tagcontent");
+
+            removeTags.addEventListener('click', (e) => {
+                if(e.target.className === 'cross ingredients') {
+                    arrayTags.push(e.path[1].innerText);
+                    selectUstensils.innerHTML = '';
+                    selectUstensils.innerHTML = `
+                        <option value ="Ustensiles">Ustensiles</option>
+                    `;
+                    this.displayComponents(selectUstensils, arrayTags);
+                }
+            })
         })
     }
 
