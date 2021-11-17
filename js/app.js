@@ -207,23 +207,42 @@ class IndexPage {
     });
   }
 
+  // filter(input) {
+  //   const datas = this.ajax.fetchData();
+
+  //   datas.then((data) => {
+  //     const arrayAllRecipes = [];
+  //     data.recipes.filter((d) =>
+  //       d.ingredients.forEach((i) => {
+  //         if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
+  //           arrayAllRecipes.push(d);
+  //           console.log(arrayAllRecipes);
+  //           // console.log(i);
+  //         }
+  //       })
+  //     );
+  //     const section = document.getElementById('sectionrecipes');
+  //     section.innerHTML = ``;
+  //     this.view.renderRecipes(arrayAllRecipes);
+  //   });
+  // }
+
   filter(input) {
     const datas = this.ajax.fetchData();
 
     datas.then((data) => {
-      const arrayAllRecipes = [];
-      data.recipes.filter((d) =>
+      const arrayAllRecipes = data.recipes.filter((d) =>
         d.ingredients.forEach((i) => {
           if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
-            arrayAllRecipes.push(d);
-            console.log(arrayAllRecipes);
-            const section = document.getElementById('sectionrecipes');
-            section.innerHTML = ``;
-            this.view.renderRecipes(arrayAllRecipes);
-            // console.log(i);
+            return i;
           }
         })
       );
+      console.log(arrayAllRecipes);
+      const section = document.getElementById('sectionrecipes');
+      section.innerHTML = ``;
+
+      // this.view.renderRecipes(arrayAllRecipes);
     });
   }
 
