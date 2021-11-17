@@ -11,8 +11,8 @@ class IndexPage {
     this.getRecipes();
     this.getDevices();
     this.getUstensils();
-    // this.displayTags();
     this.showRecipes();
+    this.search();
   }
 
   showRecipes() {
@@ -207,52 +207,35 @@ class IndexPage {
     });
   }
 
-  // displayTags() {
-  //     const tagRecipes = document.querySelector(".filteroptions--recipes");
-  //     const tagDevices = document.querySelector(".filteroptions--device");
-  //     const tagUstensils = document.querySelector(".filteroptions--ustensils");
-  //     const tagcontent = document.querySelector(".tagcontent");
+  filter(input) {
+    const datas = this.ajax.fetchData();
 
-  //     tagRecipes.addEventListener('change', (e) => {
-  //         if(e.target.nodeName === 'SELECT') {
-  //             const tag = document.createElement("span");
-  //             const cross = document.createElement("img");
-  //             tagcontent.appendChild(tag);
-  //             tag.innerText = e.target.value;
-  //             tag.classList.add("tagcontent--recipes");
-  //             tag.classList.add("margin");
-  //             tag.appendChild(cross);
-  //             cross.src = "cross.svg";
-  //             console.log(tagRecipes);
-  //         }
-  //     })
+    datas.then((data) => {
+      const arrayAllRecipes = [];
+      data.recipes.filter((d) =>
+        d.ingredients.forEach((i) => {
+          if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
+            arrayAllRecipes.push(d);
+            console.log(arrayAllRecipes);
+            const section = document.getElementById('sectionrecipes');
+            section.innerHTML = ``;
+            this.view.renderRecipes(arrayAllRecipes);
+            // console.log(i);
+          }
+        })
+      );
+    });
+  }
 
-  //     tagDevices.addEventListener('change', (e) => {
-  //         if(e.target.nodeName === 'SELECT') {
-  //             const tag = document.createElement("span");
-  //             const cross = document.createElement("img");
-  //             tagcontent.appendChild(tag);
-  //             tag.innerText = e.target.value;
-  //             tag.classList.add("tagcontent--devices");
-  //             tag.classList.add("margin");
-  //             tag.appendChild(cross);
-  //             cross.src = "cross.svg";
-  //         }
-  //     })
-
-  //     tagUstensils.addEventListener('change', (e) => {
-  //         if(e.target.nodeName === 'SELECT') {
-  //             const tag = document.createElement("span");
-  //             const cross = document.createElement("img");
-  //             tagcontent.appendChild(tag);
-  //             tag.innerText = e.target.value;
-  //             tag.classList.add("tagcontent--ustensils");
-  //             tag.classList.add("margin");
-  //             tag.appendChild(cross);
-  //             cross.src = "cross.svg";
-  //         }
-  //     })
-  // }
+  search() {
+    const research = document.getElementById('searchbar');
+    // console.log(research);
+    research.addEventListener('input', (e) => {
+      if (e.target.value.length === 3 || e.target.value.length > 3) {
+        this.filter(e.target.value);
+      }
+    });
+  }
 }
 
 const indexPage = new IndexPage(new View(), new Ajax('./data/recipes.json'));

@@ -1,9 +1,45 @@
 export class View {
+  customElement(elementName, className, elementRoot) {
+    const newElement = document.createElement(elementName);
+    newElement.classList.add(className);
+    elementRoot.appendChild(newElement);
+    return newElement;
+  }
+
+  customPic(source, alt) {
+    const pic = this.customElement(
+      'img',
+      'contentreceipts__picture',
+      'article'
+    );
+
+    pic.src = source;
+    pic.alt = alt;
+
+    return pic;
+  }
+
   renderRecipes(recipeslist) {
+    console.log(recipeslist);
     recipeslist.recipes.forEach((recipes) => {
       const idSection = document.getElementById('sectionrecipes');
-      const article = document.createElement('article');
-      const pic = document.createElement('img');
+
+      const article = this.customElement(
+        'article',
+        'contentreceipts__cardsrecipe',
+        idSection
+      );
+
+      const pic = this.customElement(
+        'img',
+        'contentreceipts__picture',
+        article
+      );
+
+      // const pic = this.customPic(
+      //   'recipe.jpg',
+      //   'photo générie de la recette finit'
+      // );
       const pic2 = document.createElement('img');
       const div = document.createElement('div');
       const div2 = document.createElement('div');
@@ -14,11 +50,6 @@ export class View {
       const span = document.createElement('span');
       const p = document.createElement('p');
 
-      idSection.appendChild(article);
-      article.classList.add('contentreceipts__cardsrecipe');
-
-      article.appendChild(pic);
-      pic.classList.add('contentreceipts__picture');
       pic.src = 'recipe.jpg';
       pic.alt = 'photo générique de la recette finit';
 
