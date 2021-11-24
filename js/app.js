@@ -1,13 +1,17 @@
 import { Ajax } from './ajax.class.js';
+// import { recipesToto } from '../data/recipes.json';
 import { View } from './view.class.js';
 
 class IndexPage {
   constructor(view, ajax) {
     this.view = view;
     this.ajax = ajax;
+    // this.recipesAjax = null;
   }
 
   run() {
+    // this.loadRecipes();
+    // console.log(recipesToto);
     this.getRecipes();
     this.getDevices();
     this.getUstensils();
@@ -22,7 +26,12 @@ class IndexPage {
     });
   }
 
+  // async loadRecipes() {
+  //   this.recipesAjax = await this.ajax.fetchData();
+  // }
+
   getRecipes() {
+    // console.log(this.loadRecipes());
     const datas = this.ajax.fetchData();
     const selectRecipes = document.querySelector('.filteroptions--recipes');
     const tagRecipes = document.querySelector('.filteroptions--recipes');
@@ -43,16 +52,17 @@ class IndexPage {
 
       tagRecipes.addEventListener('change', (e) => {
         if (e.target.nodeName === 'SELECT') {
-          const tag = document.createElement('span');
-          const cross = document.createElement('img');
-          tagcontent.appendChild(tag);
+          const tag = this.view.customElement(
+            'span',
+            'tagcontent--recipes',
+            tagcontent
+          );
           tag.innerText = e.target.value;
           tag.id = e.target.value;
-          tag.classList.add('tagcontent--recipes');
           tag.classList.add('margin');
-          tag.appendChild(cross);
-          cross.src = 'cross.svg';
-          cross.classList.add('cross');
+
+          const cross = this.view.customElement('img', 'cross', tag);
+          this.view.customPic(cross, 'cross.svg', 'icone de croix');
           cross.classList.add('ingredients');
 
           const i = sortedComponents.indexOf(e.target.value);
@@ -101,16 +111,17 @@ class IndexPage {
 
       tagDevices.addEventListener('change', (e) => {
         if (e.target.nodeName === 'SELECT') {
-          const tag = document.createElement('span');
-          const cross = document.createElement('img');
-          tagcontent.appendChild(tag);
+          const tag = this.view.customElement(
+            'span',
+            'tagcontent--devices',
+            tagcontent
+          );
           tag.innerText = e.target.value;
           tag.id = e.target.value;
-          tag.classList.add('tagcontent--devices');
           tag.classList.add('margin');
-          tag.appendChild(cross);
-          cross.src = 'cross.svg';
-          cross.classList.add('cross');
+
+          const cross = this.view.customElement('img', 'cross', tag);
+          this.view.customPic(cross, 'cross.svg', 'icone de croix');
           cross.classList.add('ingredients');
 
           const i = sortedDevices.indexOf(e.target.value);
@@ -161,16 +172,17 @@ class IndexPage {
 
       tagUstensils.addEventListener('change', (e) => {
         if (e.target.nodeName === 'SELECT') {
-          const tag = document.createElement('span');
-          const cross = document.createElement('img');
-          tagcontent.appendChild(tag);
+          const tag = this.view.customElement(
+            'span',
+            'tagcontent--ustensils',
+            tagcontent
+          );
           tag.innerText = e.target.value;
           tag.id = e.target.value;
-          tag.classList.add('tagcontent--ustensils');
           tag.classList.add('margin');
-          tag.appendChild(cross);
-          cross.src = 'cross.svg';
-          cross.classList.add('cross');
+
+          const cross = this.view.customElement('img', 'cross', tag);
+          this.view.customPic(cross, 'cross.svg', 'icone de croix');
           cross.classList.add('ingredients');
 
           const i = sortedUstensils.indexOf(e.target.value);
@@ -238,7 +250,7 @@ class IndexPage {
           }
         })
       );
-      console.log(arrayAllRecipes);
+      console.log(arrayAllRecipes, Object.values(data));
       const section = document.getElementById('sectionrecipes');
       section.innerHTML = ``;
 
