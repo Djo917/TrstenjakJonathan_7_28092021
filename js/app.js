@@ -1,212 +1,188 @@
-import { Ajax } from './ajax.class.js';
-// import { recipesToto } from '../data/recipes.json';
 import { View } from './view.class.js';
+import { recipes } from '../data/recipes.js';
 
 class IndexPage {
-  constructor(view, ajax) {
+  constructor(view) {
     this.view = view;
-    this.ajax = ajax;
-    // this.recipesAjax = null;
+    this.recipes = null; // passer à la classe view
+    this.recipesLoaded = recipes; // never bouger
   }
 
   run() {
-    // this.loadRecipes();
-    // console.log(recipesToto);
-    this.getRecipes();
+    this.filter();
+    this.getIngredients();
     this.getDevices();
     this.getUstensils();
     this.showRecipes();
-    this.search();
+    // this.search();
+  }
+
+  filter() {
+    this.recipes = this.recipesLoaded;
   }
 
   showRecipes() {
-    const datas = this.ajax.fetchData();
-    datas.then((data) => {
-      this.view.renderRecipes(data);
-    });
+    this.view.renderRecipes(this.recipes);
   }
 
-  // async loadRecipes() {
-  //   this.recipesAjax = await this.ajax.fetchData();
-  // }
-
-  getRecipes() {
-    // console.log(this.loadRecipes());
-    const datas = this.ajax.fetchData();
+  getIngredients() {
+    const wholeComponents = [];
     const selectRecipes = document.querySelector('.filteroptions--recipes');
     const tagRecipes = document.querySelector('.filteroptions--recipes');
     const tagcontent = document.querySelector('.tagcontent');
 
-    datas.then((data) => {
-      const wholeComponents = [];
-
-      data.recipes.forEach((recettes) => {
-        recettes.ingredients.forEach((ingredient) => {
-          wholeComponents.push(ingredient.ingredient);
-        });
+    this.recipes.forEach((recettes) => {
+      recettes.ingredients.forEach((ingredient) => {
+        wholeComponents.push(ingredient.ingredient);
       });
-
-      const sortedComponents = [...new Set(wholeComponents)];
-      const arrayTags = sortedComponents;
-      this.displayComponents(selectRecipes, sortedComponents);
-
-      tagRecipes.addEventListener('change', (e) => {
-        if (e.target.nodeName === 'SELECT') {
-          const tag = this.view.customElement(
-            'span',
-            'tagcontent--recipes',
-            tagcontent
-          );
-          tag.innerText = e.target.value;
-          tag.id = e.target.value;
-          tag.classList.add('margin');
-
-          const cross = this.view.customElement('img', 'cross', tag);
-          this.view.customPic(cross, 'cross.svg', 'icone de croix');
-          cross.classList.add('ingredients');
-
-          const i = sortedComponents.indexOf(e.target.value);
-          arrayTags.splice(i, 1);
-
-          selectRecipes.innerHTML = `
+    });
+    const sortedComponents = [...new Set(wholeComponents)];
+    const arrayTags = sortedComponents;
+    this.displayComponents(selectRecipes, sortedComponents);
+    tagRecipes.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tag = this.view.customElement(
+          'span',
+          'tagcontent--recipes',
+          tagcontent
+        );
+        tag.innerText = e.target.value;
+        tag.id = e.target.value;
+        tag.classList.add('margin');
+        const cross = this.view.customElement('img', 'cross', tag);
+        this.view.customPic(cross, 'cross.svg', 'icone de croix');
+        cross.classList.add('ingredients');
+        const i = sortedComponents.indexOf(e.target.value);
+        arrayTags.splice(i, 1);
+        selectRecipes.innerHTML = `
                         <option value ="Ingrédients">Ingrédients</option>
                     `;
-          this.displayComponents(selectRecipes, arrayTags);
-        }
-      });
-
-      const removeTags = document.querySelector('.tagcontent');
-
-      removeTags.addEventListener('click', (e) => {
-        if (e.target.className === 'cross ingredients') {
-          const id = document.getElementById(e.path[1].innerText);
-          removeTags.removeChild(id);
-          arrayTags.push(e.path[1].innerText);
-          selectRecipes.innerHTML = '';
-          selectRecipes.innerHTML = `
+        this.displayComponents(selectRecipes, arrayTags);
+      }
+    });
+    const removeTags = document.querySelector('.tagcontent');
+    removeTags.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        const id = document.getElementById(e.path[1].innerText);
+        removeTags.removeChild(id);
+        arrayTags.push(e.path[1].innerText);
+        selectRecipes.innerHTML = '';
+        selectRecipes.innerHTML = `
                         <option value ="Ingrédients">Ingrédients</option>
                     `;
-          this.displayComponents(selectRecipes, arrayTags);
-        }
-      });
+        this.displayComponents(selectRecipes, arrayTags);
+      }
     });
   }
 
   getDevices() {
-    const datas = this.ajax.fetchData();
+    const wholeDevices = [];
     const selectDevices = document.querySelector('.filteroptions--device ');
     const tagDevices = document.querySelector('.filteroptions--device');
     const tagcontent = document.querySelector('.tagcontent');
 
-    datas.then((data) => {
-      const wholeDevices = [];
+    this.recipes.forEach((devices) => {
+      wholeDevices.push(devices.appliance);
+    });
 
-      data.recipes.forEach((devices) => {
-        wholeDevices.push(devices.appliance);
-      });
+    const sortedDevices = [...new Set(wholeDevices)];
+    const arrayTags = sortedDevices;
+    this.displayComponents(selectDevices, sortedDevices);
 
-      const sortedDevices = [...new Set(wholeDevices)];
-      const arrayTags = sortedDevices;
-      this.displayComponents(selectDevices, sortedDevices);
+    tagDevices.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tag = this.view.customElement(
+          'span',
+          'tagcontent--devices',
+          tagcontent
+        );
+        tag.innerText = e.target.value;
+        tag.id = e.target.value;
+        tag.classList.add('margin');
 
-      tagDevices.addEventListener('change', (e) => {
-        if (e.target.nodeName === 'SELECT') {
-          const tag = this.view.customElement(
-            'span',
-            'tagcontent--devices',
-            tagcontent
-          );
-          tag.innerText = e.target.value;
-          tag.id = e.target.value;
-          tag.classList.add('margin');
+        const cross = this.view.customElement('img', 'cross', tag);
+        this.view.customPic(cross, 'cross.svg', 'icone de croix');
+        cross.classList.add('ingredients');
 
-          const cross = this.view.customElement('img', 'cross', tag);
-          this.view.customPic(cross, 'cross.svg', 'icone de croix');
-          cross.classList.add('ingredients');
+        const i = sortedDevices.indexOf(e.target.value);
+        arrayTags.splice(i, 1);
 
-          const i = sortedDevices.indexOf(e.target.value);
-          arrayTags.splice(i, 1);
-
-          selectDevices.innerHTML = `
+        selectDevices.innerHTML = `
                         <option value ="Appareil">Appareil</option>
                     `;
-          this.displayComponents(selectDevices, arrayTags);
-        }
-      });
+        this.displayComponents(selectDevices, arrayTags);
+      }
+    });
 
-      const removeTags = document.querySelector('.tagcontent');
+    const removeTags = document.querySelector('.tagcontent');
 
-      removeTags.addEventListener('click', (e) => {
-        if (e.target.className === 'cross ingredients') {
-          arrayTags.push(e.path[1].innerText);
-          selectDevices.innerHTML = '';
-          selectDevices.innerHTML = `
+    removeTags.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        arrayTags.push(e.path[1].innerText);
+        selectDevices.innerHTML = '';
+        selectDevices.innerHTML = `
                         <option value ="Appareil">Appareil</option>
                     `;
-          this.displayComponents(selectDevices, arrayTags);
-        }
-      });
+        this.displayComponents(selectDevices, arrayTags);
+      }
     });
   }
 
   getUstensils() {
-    const datas = this.ajax.fetchData();
     const selectUstensils = document.querySelector(
       '.filteroptions--ustensils '
     );
     const tagUstensils = document.querySelector('.filteroptions--ustensils');
     const tagcontent = document.querySelector('.tagcontent');
 
-    datas.then((data) => {
-      const wholeUstensils = [];
+    const wholeUstensils = [];
 
-      data.recipes.forEach((ustensils) => {
-        ustensils.ustensils.forEach((ust) => {
-          wholeUstensils.push(ust);
-        });
+    this.recipes.forEach((ustensils) => {
+      ustensils.ustensils.forEach((ust) => {
+        wholeUstensils.push(ust);
       });
+    });
 
-      const sortedUstensils = [...new Set(wholeUstensils)];
-      const arrayTags = sortedUstensils;
-      this.displayComponents(selectUstensils, sortedUstensils);
+    const sortedUstensils = [...new Set(wholeUstensils)];
+    const arrayTags = sortedUstensils;
+    this.displayComponents(selectUstensils, sortedUstensils);
 
-      tagUstensils.addEventListener('change', (e) => {
-        if (e.target.nodeName === 'SELECT') {
-          const tag = this.view.customElement(
-            'span',
-            'tagcontent--ustensils',
-            tagcontent
-          );
-          tag.innerText = e.target.value;
-          tag.id = e.target.value;
-          tag.classList.add('margin');
+    tagUstensils.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tag = this.view.customElement(
+          'span',
+          'tagcontent--ustensils',
+          tagcontent
+        );
+        tag.innerText = e.target.value;
+        tag.id = e.target.value;
+        tag.classList.add('margin');
 
-          const cross = this.view.customElement('img', 'cross', tag);
-          this.view.customPic(cross, 'cross.svg', 'icone de croix');
-          cross.classList.add('ingredients');
+        const cross = this.view.customElement('img', 'cross', tag);
+        this.view.customPic(cross, 'cross.svg', 'icone de croix');
+        cross.classList.add('ingredients');
 
-          const i = sortedUstensils.indexOf(e.target.value);
-          arrayTags.splice(i, 1);
+        const i = sortedUstensils.indexOf(e.target.value);
+        arrayTags.splice(i, 1);
 
-          selectUstensils.innerHTML = `
+        selectUstensils.innerHTML = `
                         <option value ="Appareil">Appareil</option>
                     `;
-          this.displayComponents(selectUstensils, arrayTags);
-        }
-      });
+        this.displayComponents(selectUstensils, arrayTags);
+      }
+    });
 
-      const removeTags = document.querySelector('.tagcontent');
+    const removeTags = document.querySelector('.tagcontent');
 
-      removeTags.addEventListener('click', (e) => {
-        if (e.target.className === 'cross ingredients') {
-          arrayTags.push(e.path[1].innerText);
-          selectUstensils.innerHTML = '';
-          selectUstensils.innerHTML = `
+    removeTags.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        arrayTags.push(e.path[1].innerText);
+        selectUstensils.innerHTML = '';
+        selectUstensils.innerHTML = `
                         <option value ="Ustensiles">Ustensiles</option>
                     `;
-          this.displayComponents(selectUstensils, arrayTags);
-        }
-      });
+        this.displayComponents(selectUstensils, arrayTags);
+      }
     });
   }
 
@@ -239,24 +215,24 @@ class IndexPage {
   //   });
   // }
 
-  filter(input) {
-    const datas = this.ajax.fetchData();
+  // filter(input) {
+  //   const datas = this.ajax.fetchData();
 
-    datas.then((data) => {
-      const arrayAllRecipes = data.recipes.filter((d) =>
-        d.ingredients.forEach((i) => {
-          if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
-            return i;
-          }
-        })
-      );
-      console.log(arrayAllRecipes, Object.values(data));
-      const section = document.getElementById('sectionrecipes');
-      section.innerHTML = ``;
+  //   datas.then((data) => {
+  //     const arrayAllRecipes = data.recipes.filter((d) =>
+  //       d.ingredients.forEach((i) => {
+  //         if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
+  //           return i;
+  //         }
+  //       })
+  //     );
+  //     console.log(arrayAllRecipes, Object.values(data));
+  //     const section = document.getElementById('sectionrecipes');
+  //     section.innerHTML = ``;
 
-      // this.view.renderRecipes(arrayAllRecipes);
-    });
-  }
+  //     // this.view.renderRecipes(arrayAllRecipes);
+  //   });
+  // }
 
   search() {
     const research = document.getElementById('searchbar');
@@ -269,5 +245,5 @@ class IndexPage {
   }
 }
 
-const indexPage = new IndexPage(new View(), new Ajax('./data/recipes.json'));
+const indexPage = new IndexPage(new View());
 indexPage.run();

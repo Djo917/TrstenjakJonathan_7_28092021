@@ -16,8 +16,8 @@ export class View {
   renderRecipes(recipeslist) {
     const idSection = document.getElementById('sectionrecipes');
 
-    if (recipeslist.recipes) {
-      recipeslist.recipes.forEach(() => {
+    if (recipeslist) {
+      recipeslist.forEach((recipe) => {
         const article = this.customElement(
           'article',
           'contentreceipts__cardsrecipe',
@@ -34,40 +34,65 @@ export class View {
           'recipe.jpg',
           'photo générique de la recette finit'
         );
+
+        const div = this.customElement(
+          'div',
+          'contentreceipts__titleandtime',
+          article
+        );
+
+        const h2 = this.customElement(
+          'h2',
+          'contentreceipts__titleandtime--title',
+          div
+        );
+        h2.innerText = `${recipe.name}`;
+
+        const div2 = this.customElement(
+          'div',
+          'contentreceipts__timeprep',
+          div
+        );
+
+        const picTimer = this.customElement(
+          'img',
+          'contentreceipts__titleandtime--time',
+          div2
+        );
+        this.customPic(picTimer, 'timer.svg', 'image dun chronomètre');
+
+        const span = this.customElement('span', 'span', div2);
+        span.innerText = `${recipe.time}min`;
+
+        const div3 = this.customElement('div', 'cardsrecipe__recipes', article);
+        const div4 = this.customElement('div', 'cardsrecipe__components', div3);
+
+        recipe.ingredients.forEach((ingredient) => {
+          const pRecipe = this.customElement(
+            'p',
+            'cardsrecipe__recipes--text',
+            div4
+          );
+          const spanRecipe = this.customElement(
+            'span',
+            'cardsrecipe__recipes--name',
+            pRecipe
+          );
+
+          spanRecipe.innerText = `${ingredient.ingredient} : `;
+
+          if (ingredient.quantity) {
+            pRecipe.innerText += ` ${ingredient.quantity}`;
+          }
+          if (ingredient.unit) {
+            pRecipe.innerText += ` ${ingredient.unit}`;
+          }
+        });
+
+        const div5 = this.customElement('div', 'cardsrecipe__explain', div3);
+        const p = this.customElement('p', 'cardsrecipe_recipes--text', div5);
+        p.innerText = `${recipe.description}`;
       });
-
-      const articleRoot = document.querySelectorAll(
-        '.contentreceipts__cardsrecipe'
-      );
-
-      articleRoot.forEach((a) => {
-        this.customElement('div', 'contentreceipts__titleandtime', a);
-      });
-
-      const div = document.querySelectorAll('.contentreceipts__titleandtime');
-      div.forEach((d) => {
-        this.customElement('h2', 'contentreceipts__titleandtime--title', d);
-      });
-
-      const wholeTitle = document.querySelectorAll(
-        '.contentreceipts__titleandtime--title'
-      );
-
-      wholeTitle.forEach((t) => {
-        t.innerText = `${recipeslist.recipes[0].name}`;
-      });
-
-      // const divRoot = document.querySelectorAll(
-      //   '.contentreceipts__titleandtime'
-      // );
-
-      // divRoot.forEach((d) => {
-      //   const h2 = this.customElement(
-      //     'h2',
-      //     'contentreceipts__titleandtime--title',
-      //     d
-      //   );
-      // });
     }
   }
 }
