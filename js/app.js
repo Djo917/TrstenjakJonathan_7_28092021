@@ -6,6 +6,9 @@ class IndexPage {
     this.view = view;
     this.recipes = null; // passer à la classe view
     this.recipesLoaded = recipes; // never bouger
+    this.filterIngredients = ['Sucre', 'Noix'];
+    this.filterDevices = ['Blender', 'Four', 'Casseroles'];
+    this.filterUstensils = [];
   }
 
   run() {
@@ -14,11 +17,41 @@ class IndexPage {
     this.getDevices();
     this.getUstensils();
     this.showRecipes();
-    // this.search();
+    this.search();
   }
 
   filter() {
-    this.recipes = this.recipesLoaded;
+    const copy = [];
+    if (
+      this.filterIngredients.length === 0 &&
+      this.filterDevices.length === 0 &&
+      this.filterUstensils.length === 0
+    ) {
+      this.recipes = this.recipesLoaded;
+    } else {
+      this.recipes = this.recipesLoaded;
+
+      if (this.filterIngredients.length !== 0) {
+        this.filterIngredients.forEach((filterIngredient) => {
+          this.recipes.forEach((recette) => {
+            recette.ingredients.forEach((ingredient) => {
+              if (ingredient.ingredient.match(filterIngredient)) {
+                // console.log(filterIngredient, ingredient.ingredient);
+                copy.push(recette);
+              }
+            });
+          });
+          this.recipes = new Set(copy);
+        });
+      }
+    }
+
+    if (this.filterDevices.lengh !== 0) {
+      this.filterDevices.forEach((filterDevice) => {
+        if (filterDevice.match(copy)) {
+        }
+      });
+    }
   }
 
   showRecipes() {
@@ -196,7 +229,6 @@ class IndexPage {
   }
 
   // filter(input) {
-  //   const datas = this.ajax.fetchData();
 
   //   datas.then((data) => {
   //     const arrayAllRecipes = [];
