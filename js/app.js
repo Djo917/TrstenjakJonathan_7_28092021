@@ -7,7 +7,7 @@ class IndexPage {
     this.recipes = null; // passer à la classe view
     this.recipesLoaded = recipes; // never bouger
     this.filterIngredients = ['Sucre', 'Noix'];
-    this.filterDevices = ['Blender', 'Four', 'Casseroles'];
+    this.filterDevices = ['Blender', 'Four'];
     this.filterUstensils = [];
   }
 
@@ -36,21 +36,26 @@ class IndexPage {
           this.recipes.forEach((recette) => {
             recette.ingredients.forEach((ingredient) => {
               if (ingredient.ingredient.match(filterIngredient)) {
-                // console.log(filterIngredient, ingredient.ingredient);
                 copy.push(recette);
               }
             });
           });
           this.recipes = new Set(copy);
         });
-      }
-    }
 
-    if (this.filterDevices.lengh !== 0) {
-      this.filterDevices.forEach((filterDevice) => {
-        if (filterDevice.match(copy)) {
+        if (this.filterDevices.length !== 0) {
+          this.filterDevices.forEach((filterDevice) => {
+            this.recipes.forEach((recette) => {
+              if (filterDevice.match(recette.appliance)) {
+                copy.push(recette);
+              }
+            });
+            this.recipes = new Set(copy);
+          });
+
+          console.log(this.recipes);
         }
-      });
+      }
     }
   }
 
