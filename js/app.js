@@ -125,6 +125,10 @@ class IndexPage {
                         <option value ="Ingrédients">Ingrédients</option>
                     `;
         this.displayComponents(selectRecipes, arrayTags);
+
+        if (e.target.className.includes('filteroptions--recipes')) {
+          this.filterIngredients.push(tag.innerText);
+        }
       }
     });
     const removeTags = document.querySelector('.tagcontent');
@@ -178,6 +182,11 @@ class IndexPage {
                         <option value ="Appareil">Appareil</option>
                     `;
         this.displayComponents(selectDevices, arrayTags);
+
+        if (e.target.className.includes('filteroptions--device')) {
+          console.log(e);
+          this.filterDevices.push(tag.innerText);
+        }
       }
     });
 
@@ -236,6 +245,11 @@ class IndexPage {
                         <option value ="Appareil">Appareil</option>
                     `;
         this.displayComponents(selectUstensils, arrayTags);
+
+        if (e.target.className.includes('filteroptions--ustensils')) {
+          console.log(e);
+          this.filterUstensils.push(tag.innerText);
+        }
       }
     });
 
@@ -278,25 +292,6 @@ class IndexPage {
   //     const section = document.getElementById('sectionrecipes');
   //     section.innerHTML = ``;
   //     this.view.renderRecipes(arrayAllRecipes);
-  //   });
-  // }
-
-  // filter(input) {
-  //   const datas = this.ajax.fetchData();
-
-  //   datas.then((data) => {
-  //     const arrayAllRecipes = data.recipes.filter((d) =>
-  //       d.ingredients.forEach((i) => {
-  //         if (i.ingredient.toLowerCase().includes(input.toLowerCase())) {
-  //           return i;
-  //         }
-  //       })
-  //     );
-  //     console.log(arrayAllRecipes, Object.values(data));
-  //     const section = document.getElementById('sectionrecipes');
-  //     section.innerHTML = ``;
-
-  //     // this.view.renderRecipes(arrayAllRecipes);
   //   });
   // }
 
