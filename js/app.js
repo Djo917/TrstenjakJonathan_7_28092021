@@ -6,8 +6,8 @@ class IndexPage {
     this.view = view;
     this.recipes = null; // passer à la classe view
     this.recipesLoaded = recipes; // never bouger
-    this.filterIngredients = ['Sucre', 'Noix'];
-    this.filterDevices = ['Blender', 'Four'];
+    this.filterIngredients = [];
+    this.filterDevices = [];
     this.filterUstensils = [];
   }
 
@@ -17,46 +17,75 @@ class IndexPage {
     this.getDevices();
     this.getUstensils();
     this.showRecipes();
-    this.search();
+  }
+
+  filterByTagIngredients() {
+    let copy = [];
+
+    if (this.filterIngredients.length !== 0) {
+      this.filterIngredients.forEach((filterIngredient) => {
+        copy = [];
+        this.recipes.forEach((recette) => {
+          recette.ingredients.forEach((ingredient) => {
+            const element = ingredient.ingredient.toLowerCase();
+            if (element.match(filterIngredient)) {
+              copy.push(recette);
+            }
+          });
+        });
+        this.recipes = new Set(copy);
+      });
+    }
+  }
+
+  filterByTagDevices() {
+    let copy = [];
+    if (this.filterDevices.length !== 0) {
+      this.filterDevices.forEach((filterDevice) => {
+        copy = [];
+        this.recipes.forEach((recette) => {
+          const element = recette.appliance.toLowerCase();
+          if (filterDevice.match(element)) {
+            copy.push(recette);
+          }
+        });
+
+        this.recipes = new Set(copy);
+      });
+    }
+  }
+
+  filterByTagUstensils() {
+    let copy = [];
+
+    if (this.filterUstensils.length !== 0) {
+      this.filterUstensils.forEach((filterUsensil) => {
+        copy = [];
+
+        this.recipes.forEach((recette) => {
+          const element = [];
+
+          recette.ustensils.forEach((u) => {
+            u.toLowerCase();
+            element.push(u);
+          });
+
+          if (filterUsensil.match(element)) {
+            copy.push(recette);
+          }
+        });
+
+        this.recipes = new Set(copy);
+      });
+    }
   }
 
   filter() {
-    const copy = [];
-    if (
-      this.filterIngredients.length === 0 &&
-      this.filterDevices.length === 0 &&
-      this.filterUstensils.length === 0
-    ) {
-      this.recipes = this.recipesLoaded;
-    } else {
-      this.recipes = this.recipesLoaded;
-
-      if (this.filterIngredients.length !== 0) {
-        this.filterIngredients.forEach((filterIngredient) => {
-          this.recipes.forEach((recette) => {
-            recette.ingredients.forEach((ingredient) => {
-              if (ingredient.ingredient.match(filterIngredient)) {
-                copy.push(recette);
-              }
-            });
-          });
-          this.recipes = new Set(copy);
-        });
-
-        if (this.filterDevices.length !== 0) {
-          this.filterDevices.forEach((filterDevice) => {
-            this.recipes.forEach((recette) => {
-              if (filterDevice.match(recette.appliance)) {
-                copy.push(recette);
-              }
-            });
-            this.recipes = new Set(copy);
-          });
-
-          console.log(this.recipes);
-        }
-      }
-    }
+    this.recipes = this.recipesLoaded;
+    this.filterByTagDevices();
+    this.filterByTagIngredients();
+    this.filterByTagUstensils();
+    this.search();
   }
 
   showRecipes() {
