@@ -15,6 +15,7 @@ export class View {
 
   renderRecipes(recipeslist) {
     const idSection = document.getElementById('sectionrecipes');
+    idSection.innerHTML = '';
 
     if (recipeslist) {
       recipeslist.forEach((recipe) => {
@@ -94,6 +95,16 @@ export class View {
         p.innerText = `${recipe.description}`;
       });
     }
+  }
+
+  displayComponents(type, arrayCompo) {
+    type.innerHTML = '';
+    arrayCompo.forEach((comp) => {
+      const options = document.createElement('option');
+      type.appendChild(options);
+      options.value = `${comp}`;
+      options.innerText = `${comp}`;
+    });
   }
 }
 export default View;
