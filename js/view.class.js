@@ -98,8 +98,9 @@ export class View {
   }
 
   displayComponents(type, arrayCompo) {
-    // console.log(type);
-    arrayCompo.forEach((comp) => {
+    const filtered = Array.from(new Set(arrayCompo));
+    console.log(filtered);
+    filtered.forEach((comp) => {
       const options = document.createElement('option');
       type.appendChild(options);
       options.value = `${comp}`;

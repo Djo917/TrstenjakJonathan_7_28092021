@@ -44,18 +44,9 @@ class IndexPage {
         const cross = this.view.customElement('img', 'cross', tag);
         this.view.customPic(cross, 'cross.svg', 'icone de croix');
         cross.classList.add('ingredients');
-        //     const i = sortedComponents.indexOf(e.target.value);
-        //     arrayTags.splice(i, 1);
-        //     // selectRecipes.innerHTML = `
-        //     //                 <option value ="Ingrédients">Ingrédients</option>
-        //     //             `;
-        //     this.view.displayComponents(selectRecipes, arrayTags);
-        //     if (e.target.className.includes('filteroptions--recipes')) {
-        //       const section = document.getElementById('sectionrecipes');
-        //       section.innerHTML = '';
+
         this.filterIngredients.push(tag.innerText.toLowerCase());
         this.show();
-        //     }
       }
     });
 
@@ -64,15 +55,8 @@ class IndexPage {
         const id = document.getElementById(e.path[1].innerText);
         const index = this.filterIngredients.indexOf(id.innerText);
         removeTags.removeChild(id);
-
         this.filterIngredients.splice(index, 1);
-        this.show();
         this.filterByTagIngredients();
-        // tagRecipes.innerHTML = '';
-        tagRecipes.innerHTML = `
-          <option value ="Ingrédients">Ingrédients</option>
-        `;
-        this.view.displayComponents(tagRecipes, this.filterIngredients);
       }
     });
   }
