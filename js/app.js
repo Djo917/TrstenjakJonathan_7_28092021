@@ -61,20 +61,18 @@ class IndexPage {
 
     removeTags.addEventListener('click', (e) => {
       if (e.target.className === 'cross ingredients') {
-        console.log(e);
         const id = document.getElementById(e.path[1].innerText);
         const index = this.filterIngredients.indexOf(id.innerText);
         removeTags.removeChild(id);
 
         this.filterIngredients.splice(index, 1);
-
-        this.filterByTagIngredients;
-        //     arrayTags.push(e.path[1].innerText);
-        //     selectRecipes.innerHTML = '';
-        //     selectRecipes.innerHTML = `
-        //                     <option value ="Ingrédients">Ingrédients</option>
-        //                 `;
-        //     this.view.displayComponents(selectRecipes, arrayTags);
+        this.show();
+        this.filterByTagIngredients();
+        // tagRecipes.innerHTML = '';
+        tagRecipes.innerHTML = `
+          <option value ="Ingrédients">Ingrédients</option>
+        `;
+        this.view.displayComponents(tagRecipes, this.filterIngredients);
       }
     });
   }

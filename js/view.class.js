@@ -98,7 +98,7 @@ export class View {
   }
 
   displayComponents(type, arrayCompo) {
-    type.innerHTML = '';
+    // console.log(type);
     arrayCompo.forEach((comp) => {
       const options = document.createElement('option');
       type.appendChild(options);
