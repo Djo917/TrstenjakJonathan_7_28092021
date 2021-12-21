@@ -55,8 +55,15 @@ class IndexPage {
         const id = document.getElementById(e.path[1].innerText);
         const index = this.filterIngredients.indexOf(id.innerText);
         removeTags.removeChild(id);
+
         this.filterIngredients.splice(index, 1);
+        this.show();
         this.filterByTagIngredients();
+        // tagRecipes.innerHTML = '';
+        // tagRecipes.innerHTML = `
+        //   <option value ="Ingrédients">Ingrédients</option>
+        // `;
+        // this.view.displayComponents(tagRecipes, this.filterIngredients);
       }
     });
   }
