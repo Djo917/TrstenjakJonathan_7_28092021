@@ -14,7 +14,7 @@ class IndexPage {
   run() {
     this.show();
     this.ingredientsListener();
-    // this.devicesListener();
+    this.devicesListener();
     // this.ustensilsListener();
   }
 
@@ -28,15 +28,14 @@ class IndexPage {
 
   ingredientsListener() {
     const tagRecipes = document.querySelector('.filteroptions--recipes');
-    const tagcontent = document.querySelector('.tagcontent');
-    const removeTags = document.querySelector('.tagcontent');
+    const tagContent = document.querySelector('.tagcontent');
 
     tagRecipes.addEventListener('change', (e) => {
       if (e.target.nodeName === 'SELECT') {
         const tag = this.view.customElement(
           'span',
           'tagcontent--recipes',
-          tagcontent
+          tagContent
         );
         tag.innerText = e.target.value;
         tag.id = e.target.value;
@@ -46,19 +45,19 @@ class IndexPage {
         cross.classList.add('ingredients');
 
         this.filterIngredients.push(tag.innerText.toLowerCase());
-        this.show();
+        // this.show();
       }
     });
 
-    removeTags.addEventListener('click', (e) => {
+    tagContent.addEventListener('click', (e) => {
       if (e.target.className === 'cross ingredients') {
         const id = document.getElementById(e.path[1].innerText);
         const index = this.filterIngredients.indexOf(id.innerText);
-        removeTags.removeChild(id);
+        tagContent.removeChild(id);
 
         this.filterIngredients.splice(index, 1);
-        this.show();
-        this.filterByTagIngredients();
+        // this.show();
+        // this.filterByTagIngredients();
         // tagRecipes.innerHTML = '';
         // tagRecipes.innerHTML = `
         //   <option value ="Ingrédients">Ingrédients</option>
@@ -68,53 +67,48 @@ class IndexPage {
     });
   }
 
-  // devicesListener() {
-  //   const tagRecipes = document.querySelector('.filteroptions--recipes');
-  //   const tagcontent = document.querySelector('.tagcontent');
-  //   const removeTags = document.querySelector('.tagcontent');
+  devicesListener() {
+    const tagDevices = document.querySelector('.filteroptions--device');
+    const tagContent = document.querySelector('.tagcontent');
 
-  //   tagRecipes.addEventListener('change', (e) => {
-  //     if (e.target.nodeName === 'SELECT') {
-  //       const tag = this.view.customElement(
-  //         'span',
-  //         'tagcontent--recipes',
-  //         tagcontent
-  //       );
-  //       tag.innerText = e.target.value;
-  //       tag.id = e.target.value;
-  //       tag.classList.add('margin');
-  //       const cross = this.view.customElement('img', 'cross', tag);
-  //       this.view.customPic(cross, 'cross.svg', 'icone de croix');
-  //       cross.classList.add('ingredients');
-  //       //     const i = sortedComponents.indexOf(e.target.value);
-  //       //     arrayTags.splice(i, 1);
-  //       //     // selectRecipes.innerHTML = `
-  //       //     //                 <option value ="Ingrédients">Ingrédients</option>
-  //       //     //             `;
-  //       //     this.view.displayComponents(selectRecipes, arrayTags);
-  //       //     if (e.target.className.includes('filteroptions--recipes')) {
-  //       //       const section = document.getElementById('sectionrecipes');
-  //       //       section.innerHTML = '';
-  //       this.filterDevices.push(tag.innerText.toLowerCase());
-  //       console.log(this.filterDevices);
-  //       this.show();
-  //       //     }
-  //     }
-  //   });
+    tagDevices.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tag = this.view.customElement(
+          'span',
+          'tagcontent--devices',
+          tagContent
+        );
+        tag.innerText = e.target.value;
+        tag.id = e.target.value;
+        tag.classList.add('margin');
+        const cross = this.view.customElement('img', 'cross', tag);
+        this.view.customPic(cross, 'cross.svg', 'icone de croix');
+        cross.classList.add('ingredients');
 
-  //   removeTags.addEventListener('click', (e) => {
-  //     if (e.target.className === 'cross ingredients') {
-  //       const id = document.getElementById(e.path[1].innerText);
-  //       removeTags.removeChild(id);
-  //       //     arrayTags.push(e.path[1].innerText);
-  //       //     selectRecipes.innerHTML = '';
-  //       //     selectRecipes.innerHTML = `
-  //       //                     <option value ="Ingrédients">Ingrédients</option>
-  //       //                 `;
-  //       //     this.view.displayComponents(selectRecipes, arrayTags);
-  //     }
-  //   });
-  // }
+        this.filterDevices.push(tag.innerText.toLowerCase());
+        this.show();
+      }
+    });
+
+    tagContent.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        const id = document.getElementById(e.path[1].innerText);
+        console.log(e.path[1].innerText, id);
+        const index = this.filterDevices.indexOf(id.innerText);
+        tagContent.removeChild(id);
+
+        this.filterDevices.splice(index, 1);
+        // this.show();
+        // this.filterByTagDevices();
+        //     arrayTags.push(e.path[1].innerText);
+        //     selectRecipes.innerHTML = '';
+        //     selectRecipes.innerHTML = `
+        //                     <option value ="Ingrédients">Ingrédients</option>
+        //                 `;
+        //     this.view.displayComponents(selectRecipes, arrayTags);
+      }
+    });
+  }
 
   // ustensilsListener() {
   //   const tagRecipes = document.querySelector('.filteroptions--recipes');
@@ -253,8 +247,6 @@ class IndexPage {
   getDevices() {
     const wholeDevices = [];
     const selectDevices = document.querySelector('.filteroptions--device ');
-    const tagDevices = document.querySelector('.filteroptions--device');
-    const tagcontent = document.querySelector('.tagcontent');
 
     this.recipes.forEach((devices) => {
       wholeDevices.push(devices.appliance);
@@ -263,47 +255,6 @@ class IndexPage {
     const sortedDevices = [...new Set(wholeDevices)];
     const arrayTags = sortedDevices;
     this.view.displayComponents(selectDevices, sortedDevices);
-
-    tagDevices.addEventListener('change', (e) => {
-      if (e.target.nodeName === 'SELECT') {
-        const tag = this.view.customElement(
-          'span',
-          'tagcontent--devices',
-          tagcontent
-        );
-        tag.innerText = e.target.value;
-        tag.id = e.target.value;
-        tag.classList.add('margin');
-
-        const cross = this.view.customElement('img', 'cross', tag);
-        this.view.customPic(cross, 'cross.svg', 'icone de croix');
-        cross.classList.add('ingredients');
-
-        const i = sortedDevices.indexOf(e.target.value);
-        arrayTags.splice(i, 1);
-
-        selectDevices.innerHTML = `
-                        <option value ="Appareil">Appareil</option>
-                    `;
-        if (e.target.className.includes('filteroptions--device')) {
-          this.filterDevices.push(tag.innerText.toLowerCase());
-        }
-        this.view.displayComponents(selectDevices, arrayTags);
-      }
-    });
-
-    const removeTags = document.querySelector('.tagcontent');
-
-    removeTags.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        arrayTags.push(e.path[1].innerText);
-        selectDevices.innerHTML = '';
-        selectDevices.innerHTML = `
-                        <option value ="Appareil">Appareil</option>
-                    `;
-        this.view.displayComponents(selectDevices, arrayTags);
-      }
-    });
   }
 
   getUstensils() {
