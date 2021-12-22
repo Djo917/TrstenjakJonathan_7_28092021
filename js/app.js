@@ -15,7 +15,7 @@ class IndexPage {
     this.show();
     this.ingredientsListener();
     this.devicesListener();
-    // this.ustensilsListener();
+    this.ustensilsListener();
   }
 
   show() {
@@ -110,53 +110,43 @@ class IndexPage {
     });
   }
 
-  // ustensilsListener() {
-  //   const tagRecipes = document.querySelector('.filteroptions--recipes');
-  //   const tagcontent = document.querySelector('.tagcontent');
-  //   const removeTags = document.querySelector('.tagcontent');
+  ustensilsListener() {
+    const tagRecipes = document.querySelector('.filteroptions--ustensils');
+    const tagContent = document.querySelector('.tagcontent');
 
-  //   tagRecipes.addEventListener('change', (e) => {
-  //     if (e.target.nodeName === 'SELECT') {
-  //       const tag = this.view.customElement(
-  //         'span',
-  //         'tagcontent--recipes',
-  //         tagcontent
-  //       );
-  //       tag.innerText = e.target.value;
-  //       tag.id = e.target.value;
-  //       tag.classList.add('margin');
-  //       const cross = this.view.customElement('img', 'cross', tag);
-  //       this.view.customPic(cross, 'cross.svg', 'icone de croix');
-  //       cross.classList.add('ingredients');
-  //       //     const i = sortedComponents.indexOf(e.target.value);
-  //       //     arrayTags.splice(i, 1);
-  //       //     // selectRecipes.innerHTML = `
-  //       //     //                 <option value ="Ingrédients">Ingrédients</option>
-  //       //     //             `;
-  //       //     this.view.displayComponents(selectRecipes, arrayTags);
-  //       //     if (e.target.className.includes('filteroptions--recipes')) {
-  //       //       const section = document.getElementById('sectionrecipes');
-  //       //       section.innerHTML = '';
-  //       this.filterUstensils.push(tag.innerText.toLowerCase());
-  //       console.log(this.filterUstensils);
-  //       this.show();
-  //       //     }
-  //     }
-  //   });
+    tagRecipes.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tag = this.view.customElement(
+          'span',
+          'tagcontent--ustensils',
+          tagContent
+        );
+        tag.innerText = e.target.value;
+        tag.id = e.target.value;
+        tag.classList.add('margin');
+        const cross = this.view.customElement('img', 'cross', tag);
+        this.view.customPic(cross, 'cross.svg', 'icone de croix');
+        cross.classList.add('ingredients');
 
-  //   removeTags.addEventListener('click', (e) => {
-  //     if (e.target.className === 'cross ingredients') {
-  //       const id = document.getElementById(e.path[1].innerText);
-  //       removeTags.removeChild(id);
-  //       //     arrayTags.push(e.path[1].innerText);
-  //       //     selectRecipes.innerHTML = '';
-  //       //     selectRecipes.innerHTML = `
-  //       //                     <option value ="Ingrédients">Ingrédients</option>
-  //       //                 `;
-  //       //     this.view.displayComponents(selectRecipes, arrayTags);
-  //     }
-  //   });
-  // }
+        this.filterUstensils.push(tag.innerText.toLowerCase());
+        console.log(this.filterUstensils);
+        this.show();
+      }
+    });
+
+    tagContent.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        const id = document.getElementById(e.path[1].innerText);
+        tagContent.removeChild(id);
+        //     arrayTags.push(e.path[1].innerText);
+        //     selectRecipes.innerHTML = '';
+        //     selectRecipes.innerHTML = `
+        //                     <option value ="Ingrédients">Ingrédients</option>
+        //                 `;
+        //     this.view.displayComponents(selectRecipes, arrayTags);
+      }
+    });
+  }
 
   filterByTagIngredients() {
     let copy = [];
@@ -253,7 +243,6 @@ class IndexPage {
     });
 
     const sortedDevices = [...new Set(wholeDevices)];
-    const arrayTags = sortedDevices;
     this.view.displayComponents(selectDevices, sortedDevices);
   }
 
@@ -261,8 +250,6 @@ class IndexPage {
     const selectUstensils = document.querySelector(
       '.filteroptions--ustensils '
     );
-    const tagUstensils = document.querySelector('.filteroptions--ustensils');
-    const tagcontent = document.querySelector('.tagcontent');
 
     const wholeUstensils = [];
 
@@ -273,50 +260,7 @@ class IndexPage {
     });
 
     const sortedUstensils = [...new Set(wholeUstensils)];
-    const arrayTags = sortedUstensils;
     this.view.displayComponents(selectUstensils, sortedUstensils);
-
-    tagUstensils.addEventListener('change', (e) => {
-      if (e.target.nodeName === 'SELECT') {
-        const tag = this.view.customElement(
-          'span',
-          'tagcontent--ustensils',
-          tagcontent
-        );
-        tag.innerText = e.target.value;
-        tag.id = e.target.value;
-        tag.classList.add('margin');
-
-        const cross = this.view.customElement('img', 'cross', tag);
-        this.view.customPic(cross, 'cross.svg', 'icone de croix');
-        cross.classList.add('ingredients');
-
-        const i = sortedUstensils.indexOf(e.target.value);
-        arrayTags.splice(i, 1);
-
-        selectUstensils.innerHTML = `
-                        <option value ="Appareil">Appareil</option>
-                    `;
-        if (e.target.className.includes('filteroptions--ustensils')) {
-          this.filterUstensils.push(tag.innerText.toLowerCase());
-          console.log(this.filterUstensils);
-        }
-        this.view.displayComponents(selectUstensils, arrayTags);
-      }
-    });
-
-    const removeTags = document.querySelector('.tagcontent');
-
-    removeTags.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        arrayTags.push(e.path[1].innerText);
-        selectUstensils.innerHTML = '';
-        selectUstensils.innerHTML = `
-                        <option value ="Ustensiles">Ustensiles</option>
-                    `;
-        this.view.displayComponents(selectUstensils, arrayTags);
-      }
-    });
   }
 
   // filter(input) {
