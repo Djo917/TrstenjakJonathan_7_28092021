@@ -13,6 +13,19 @@ export class View {
     return html;
   }
 
+  removeTags() {
+    const tagContent = document.querySelector('.tagcontent');
+
+    tagContent.addEventListener('click', (e) => {
+      if (e.target.className === 'cross ingredients') {
+        const id = document.getElementById('banane');
+        console.log(document.getElementById('banane'));
+        const index = this.filterDevices.indexOf(id.innerText);
+        tagContent.removeChild(id);
+      }
+    });
+  }
+
   renderRecipes(recipeslist) {
     const idSection = document.getElementById('sectionrecipes');
     idSection.innerHTML = '';
@@ -100,6 +113,7 @@ export class View {
   displayComponents(type, arrayCompo) {
     const filtered = Array.from(new Set(arrayCompo));
     filtered.sort();
+    type.innerHTML = '';
 
     filtered.forEach((comp) => {
       const options = document.createElement('option');
