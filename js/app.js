@@ -31,41 +31,43 @@ class IndexPage {
     const tagRecipes = document.querySelector('.filteroptions--recipes');
     const tagContent = document.querySelector('.tagcontent');
 
-    tagRecipes.addEventListener('change', (e) => {
-      if (e.target.nodeName === 'SELECT') {
-        const tag = this.view.customElement(
-          'span',
-          'tagcontent--recipes',
-          tagContent
-        );
-        tag.innerText = e.target.value;
-        // tag.id = e.target.value;
-        // tag.classList.add('margin');
-        // const cross = this.view.customElement('img', 'cross', tag);
-        // this.view.customPic(cross, 'cross.svg', 'icone de croix');
-        // cross.classList.add('ingredients');
+    this.view.createTags();
 
-        // this.filterIngredients.push(tag.innerText.toLowerCase());
-        // this.show();
-      }
-    });
+    // tagRecipes.addEventListener('change', (e) => {
+    //   if (e.target.nodeName === 'SELECT') {
+    //     const tag = this.view.customElement(
+    //       'span',
+    //       'tagcontent--recipes',
+    //       tagContent
+    //     );
+    //     tag.innerText = e.target.value;
+    //     // tag.id = e.target.value;
+    //     // tag.classList.add('margin');
+    //     // const cross = this.view.customElement('img', 'cross', tag);
+    //     // this.view.customPic(cross, 'cross.svg', 'icone de croix');
+    //     // cross.classList.add('ingredients');
 
-    tagContent.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        const id = document.getElementById(e.path[1].innerText);
-        const index = this.filterIngredients.indexOf(id.innerText);
-        tagContent.removeChild(id);
+    //     // this.filterIngredients.push(tag.innerText.toLowerCase());
+    //     // this.show();
+    //   }
+    // });
 
-        this.filterIngredients.splice(index, 1);
-        // this.show();
-        // this.filterByTagIngredients();
-        // tagRecipes.innerHTML = '';
-        // tagRecipes.innerHTML = `
-        //   <option value ="Ingrédients">Ingrédients</option>
-        // `;
-        // this.view.displayComponents(tagRecipes, this.filterIngredients);
-      }
-    });
+    // tagContent.addEventListener('click', (e) => {
+    //   if (e.target.className === 'cross ingredients') {
+    //     const id = document.getElementById(e.path[1].innerText);
+    //     const index = this.filterIngredients.indexOf(id.innerText);
+    //     tagContent.removeChild(id);
+
+    //     this.filterIngredients.splice(index, 1);
+    //     // this.show();
+    //     // this.filterByTagIngredients();
+    //     // tagRecipes.innerHTML = '';
+    //     // tagRecipes.innerHTML = `
+    //     //   <option value ="Ingrédients">Ingrédients</option>
+    //     // `;
+    //     // this.view.displayComponents(tagRecipes, this.filterIngredients);
+    //   }
+    // });
   }
 
   devicesListener() {
