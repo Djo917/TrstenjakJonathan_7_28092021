@@ -13,41 +13,21 @@ export class View {
     return html;
   }
 
-  removeTags() {
-    const tagContent = document.querySelector('.tagcontent');
-
-    tagContent.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        const id = document.getElementById('banane');
-        console.log(document.getElementById(id));
-        const index = this.filterIngredients.indexOf(id.innerText);
-        tagContent.removeChild(id);
-      }
-    });
+  removeTags(tagElt, tagContent) {
+    tagContent.removeChild(tagElt);
   }
 
-  createTags() {
-    const tagRecipes = document.querySelector('.filteroptions--recipes');
-    const tagContent = document.querySelector('.tagcontent');
+  createTags(event, tagContent) {
+    const tag = this.customElement('span', 'tagcontent--recipes', tagContent);
 
-    tagRecipes.addEventListener('change', (e) => {
-      if (e.target.nodeName === 'SELECT') {
-        const tag = this.customElement(
-          'span',
-          'tagcontent--recipes',
-          tagContent
-        );
-        tag.innerText = e.target.value;
-        tag.id = e.target.value;
-        tag.classList.add('margin');
-        const cross = this.customElement('img', 'cross', tag);
-        this.customPic(cross, 'cross.svg', 'icone de croix');
-        cross.classList.add('ingredients');
+    tag.innerText = event.target.value;
+    tag.id = event.target.value;
+    tag.classList.add('margin');
+    const cross = this.customElement('img', 'cross', tag);
+    this.customPic(cross, 'cross.svg', 'icone de croix');
+    cross.classList.add('ingredients');
 
-        this.filterDevices.push(tag.innerText.toLowerCase());
-        this.show();
-      }
-    });
+    return event.target.value;
   }
 
   renderRecipes(recipeslist) {
