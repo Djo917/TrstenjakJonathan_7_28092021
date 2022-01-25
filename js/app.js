@@ -16,6 +16,7 @@ class IndexPage {
     this.ingredientsListener();
     this.devicesListener();
     this.ustensilsListener();
+    this.tagsListener();
   }
 
   show() {
@@ -40,21 +41,21 @@ class IndexPage {
       }
     });
 
-    tagContent.addEventListener('click', (e) => {
-      const tagElt = e.target.parentNode;
-      const tagEltClassName = tagElt.className;
-      if (
-        e.target.className === 'cross ingredients' &&
-        tagEltClassName.includes(className)
-      ) {
-        this.filterIngredients = this.filterIngredients.filter(
-          (ingredient) => ingredient !== tagElt.id
-        );
+    // tagContent.addEventListener('click', (e) => {
+    //   const tagElt = e.target.parentNode;
+    //   const tagEltClassName = tagElt.className;
+    //   if (
+    //     e.target.className === 'cross ingredients' &&
+    //     tagEltClassName.includes(className)
+    //   ) {
+    //     this.filterIngredients = this.filterIngredients.filter(
+    //       (ingredient) => ingredient !== tagElt.id
+    //     );
 
-        this.view.removeTags(tagElt, tagContent);
-        this.show();
-      }
-    });
+    //     this.view.removeTags(tagElt, tagContent);
+    //     this.show();
+    //   }
+    // });
   }
 
   tagsListener() {
@@ -69,35 +70,41 @@ class IndexPage {
     tagContent.addEventListener('change', (e) => {
       const tagElt = e.target.parentNode;
       const tagEltClassName = tagElt.className;
-
-      if(e.target.nodeName === 'SELECT') {
-        if(e.target.className)
-        const tagValue = this.view.createTags(e, )
-      }
-    })
+    });
 
     tagContent.addEventListener('click', (e) => {
       const tagElt = e.target.parentNode;
       const tagEltClassName = tagElt.className;
 
-      if(e.target.className === 'cross ingredients' && tagEltClassName.includes(recipesName)) {
-        this.filterIngredients = this.filterIngredients.filter((ingredient) => ingredient !== tagElt.id);
+      if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(recipesName)
+      ) {
+        this.filterIngredients = this.filterIngredients.filter(
+          (ingredient) => ingredient !== tagElt.id
+        );
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      } else if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(devicesName)
+      ) {
+        this.filterDevices = this.filterDevices.filter(
+          (device) => device !== tagElt.id
+        );
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      } else if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(ustensilsName)
+      ) {
+        this.filterUstensils = this.filterUstensils.filter(
+          (ustensils) => ustensils !== tagElt.id
+        );
         this.view.removeTags(tagElt, tagContent);
         this.show();
       }
-      else if (e.target.className === 'cross ingredients' && tagEltClassName.includes(devicesName)) {
-        this.filterDevices = this.filterDevices.filter((device) => device !== tagElt.id);
-        this.view.removeTags(tagElt, tagContent);
-        this.show();
-      }
-      else(e.target.className === 'cross ingredients' && tagEltClassName.includes(ustensilsName)) {
-        this.filterUstensils = this.filterUstensils.filter((ustensils) => ustensils !== tagElt.id);
-        this.view.removeTags(tagElt, tagContent);
-        this.show();
-      }
-    })
-
-
+    });
   }
 
   devicesListener() {
@@ -105,29 +112,29 @@ class IndexPage {
     const tagContent = document.querySelector('.tagcontent');
     const className = 'tagcontent--devices';
 
-    // tagDevices.addEventListener('change', (e) => {
-    //   if (e.target.nodeName === 'SELECT') {
-    //     const tagValue = this.view.createTags(e, className, tagContent);
-    //     this.filterDevices.push(tagValue.toLowerCase());
-    //     this.show();
-    //   }
-    // });
-
-    tagContent.addEventListener('click', (e) => {
-      const tagElt = e.target.parentNode;
-      const tagEltClassName = tagElt.className;
-      if (
-        e.target.className === 'cross ingredients' &&
-        tagEltClassName.includes(className)
-      ) {
-        this.filterDevices = this.filterDevices.filter(
-          (device) => device !== tagElt.id
-        );
-
-        this.view.removeTags(tagElt, tagContent);
+    tagDevices.addEventListener('change', (e) => {
+      if (e.target.nodeName === 'SELECT') {
+        const tagValue = this.view.createTags(e, className, tagContent);
+        this.filterDevices.push(tagValue.toLowerCase());
         this.show();
       }
     });
+
+    // tagContent.addEventListener('click', (e) => {
+    //   const tagElt = e.target.parentNode;
+    //   const tagEltClassName = tagElt.className;
+    //   if (
+    //     e.target.className === 'cross ingredients' &&
+    //     tagEltClassName.includes(className)
+    //   ) {
+    //     this.filterDevices = this.filterDevices.filter(
+    //       (device) => device !== tagElt.id
+    //     );
+
+    //     this.view.removeTags(tagElt, tagContent);
+    //     this.show();
+    //   }
+    // });
   }
 
   ustensilsListener() {
@@ -143,22 +150,22 @@ class IndexPage {
       }
     });
 
-    tagContent.addEventListener('click', (e) => {
-      const tagElt = e.target.parentNode;
-      const tagEltClassName = tagElt.className;
+    // tagContent.addEventListener('click', (e) => {
+    //   const tagElt = e.target.parentNode;
+    //   const tagEltClassName = tagElt.className;
 
-      if (
-        e.target.className === 'cross ingredients' &&
-        tagEltClassName.includes(className)
-      ) {
-        this.filterUstensils = this.filterUstensils.filter(
-          (ustensils) => ustensils !== tagElt.id
-        );
+    //   if (
+    //     e.target.className === 'cross ingredients' &&
+    //     tagEltClassName.includes(className)
+    //   ) {
+    //     this.filterUstensils = this.filterUstensils.filter(
+    //       (ustensils) => ustensils !== tagElt.id
+    //     );
 
-        this.view.removeTags(tagElt, tagContent);
-        this.show();
-      }
-    });
+    //     this.view.removeTags(tagElt, tagContent);
+    //     this.show();
+    //   }
+    // });
   }
 
   filterByTagIngredients() {

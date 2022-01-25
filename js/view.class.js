@@ -14,7 +14,6 @@ export class View {
   }
 
   removeTags(tagElt, tagContent) {
-    console.log(tagElt);
     tagContent.removeChild(tagElt);
   }
 
