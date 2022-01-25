@@ -16,7 +16,6 @@ class IndexPage {
     this.ingredientsListener();
     this.devicesListener();
     this.ustensilsListener();
-    // this.view.removeTags();
   }
 
   show() {
@@ -42,9 +41,12 @@ class IndexPage {
     });
 
     tagContent.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        const tagElt = e.target.parentNode;
-
+      const tagElt = e.target.parentNode;
+      const tagEltClassName = tagElt.className;
+      if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(className)
+      ) {
         this.filterIngredients = this.filterIngredients.filter(
           (ingredient) => ingredient !== tagElt.id
         );
@@ -55,25 +57,69 @@ class IndexPage {
     });
   }
 
+  tagsListener() {
+    const tagContent = document.querySelector('.tagcontent');
+    const tagRecipes = document.querySelector('.filteroptions--recipes');
+    const recipesName = 'tagcontent--recipes';
+    const tagDevices = document.querySelector('.filteroptions--device');
+    const devicesName = 'tagcontent--devices';
+    const tagUstensils = document.querySelector('.filteroptions--ustensils');
+    const ustensilsName = 'tagcontent--ustensils';
+
+    tagContent.addEventListener('change', (e) => {
+      const tagElt = e.target.parentNode;
+      const tagEltClassName = tagElt.className;
+
+      if(e.target.nodeName === 'SELECT') {
+        if(e.target.className)
+        const tagValue = this.view.createTags(e, )
+      }
+    })
+
+    tagContent.addEventListener('click', (e) => {
+      const tagElt = e.target.parentNode;
+      const tagEltClassName = tagElt.className;
+
+      if(e.target.className === 'cross ingredients' && tagEltClassName.includes(recipesName)) {
+        this.filterIngredients = this.filterIngredients.filter((ingredient) => ingredient !== tagElt.id);
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      }
+      else if (e.target.className === 'cross ingredients' && tagEltClassName.includes(devicesName)) {
+        this.filterDevices = this.filterDevices.filter((device) => device !== tagElt.id);
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      }
+      else(e.target.className === 'cross ingredients' && tagEltClassName.includes(ustensilsName)) {
+        this.filterUstensils = this.filterUstensils.filter((ustensils) => ustensils !== tagElt.id);
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      }
+    })
+
+
+  }
+
   devicesListener() {
     const tagDevices = document.querySelector('.filteroptions--device');
     const tagContent = document.querySelector('.tagcontent');
     const className = 'tagcontent--devices';
 
-    tagDevices.addEventListener('change', (e) => {
-      if (e.target.nodeName === 'SELECT') {
-        const tagValue = this.view.createTags(e, className, tagContent);
-
-        this.filterDevices.push(tagValue.toLowerCase());
-        console.log(this.filterDevices);
-        this.show();
-      }
-    });
+    // tagDevices.addEventListener('change', (e) => {
+    //   if (e.target.nodeName === 'SELECT') {
+    //     const tagValue = this.view.createTags(e, className, tagContent);
+    //     this.filterDevices.push(tagValue.toLowerCase());
+    //     this.show();
+    //   }
+    // });
 
     tagContent.addEventListener('click', (e) => {
-      if (e.target.className === 'cross ingredients') {
-        const tagElt = e.target.parentNode;
-
+      const tagElt = e.target.parentNode;
+      const tagEltClassName = tagElt.className;
+      if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(className)
+      ) {
         this.filterDevices = this.filterDevices.filter(
           (device) => device !== tagElt.id
         );
@@ -85,40 +131,34 @@ class IndexPage {
   }
 
   ustensilsListener() {
-    const tagRecipes = document.querySelector('.filteroptions--ustensils');
+    const tagUstensils = document.querySelector('.filteroptions--ustensils');
     const tagContent = document.querySelector('.tagcontent');
+    const className = 'tagcontent--ustensils';
 
-    tagRecipes.addEventListener('change', (e) => {
+    tagUstensils.addEventListener('change', (e) => {
       if (e.target.nodeName === 'SELECT') {
-        const tag = this.view.customElement(
-          'span',
-          'tagcontent--ustensils',
-          tagContent
-        );
-        tag.innerText = e.target.value;
-        tag.id = e.target.value;
-        tag.classList.add('margin');
-        const cross = this.view.customElement('img', 'cross', tag);
-        this.view.customPic(cross, 'cross.svg', 'icone de croix');
-        cross.classList.add('ingredients');
-
-        this.filterUstensils.push(tag.innerText.toLowerCase());
+        const tagValue = this.view.createTags(e, className, tagContent);
+        this.filterDevices.push(tagValue.toLowerCase());
         this.show();
       }
     });
 
-    // tagContent.addEventListener('click', (e) => {
-    //   if (e.target.className === 'cross ingredients') {
-    //     const id = document.getElementById(e.path[1].innerText);
-    //     tagContent.removeChild(id);
-    //     //     arrayTags.push(e.path[1].innerText);
-    //     //     selectRecipes.innerHTML = '';
-    //     //     selectRecipes.innerHTML = `
-    //     //                     <option value ="Ingrédients">Ingrédients</option>
-    //     //                 `;
-    //     //     this.view.displayComponents(selectRecipes, arrayTags);
-    //   }
-    // });
+    tagContent.addEventListener('click', (e) => {
+      const tagElt = e.target.parentNode;
+      const tagEltClassName = tagElt.className;
+
+      if (
+        e.target.className === 'cross ingredients' &&
+        tagEltClassName.includes(className)
+      ) {
+        this.filterUstensils = this.filterUstensils.filter(
+          (ustensils) => ustensils !== tagElt.id
+        );
+
+        this.view.removeTags(tagElt, tagContent);
+        this.show();
+      }
+    });
   }
 
   filterByTagIngredients() {

@@ -14,11 +14,12 @@ export class View {
   }
 
   removeTags(tagElt, tagContent) {
+    console.log(tagElt);
     tagContent.removeChild(tagElt);
   }
 
-  createTags(event, tagContent) {
-    const tag = this.customElement('span', 'tagcontent--recipes', tagContent);
+  createTags(event, className, tagContent) {
+    const tag = this.customElement('span', className, tagContent);
 
     tag.innerText = event.target.value;
     tag.id = event.target.value;
